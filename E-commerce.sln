@@ -1,10 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerce.API", "E-commerce.API\E-commerce.API.csproj", "{2A73658E-8173-4B30-AD5A-A60361B777E9}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-commerce.API", "src\E-commerce.API\E-commerce.API.csproj", "{2A73658E-8173-4B30-AD5A-A60361B777E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerce.Domain", "E-commerce.Domain\E-commerce.Domain.csproj", "{7FBE99DE-3D58-4A09-8F51-340DD993BC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-commerce.Domain", "src\E-commerce.Domain\E-commerce.Domain.csproj", "{7FBE99DE-3D58-4A09-8F51-340DD993BC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerce.Infrastructure", "E-commerce.Infrastructure\E-commerce.Infrastructure.csproj", "{7518EBE1-5FBD-4C18-8532-1953BFB65542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-commerce.Infrastructure", "src\E-commerce.Infrastructure\E-commerce.Infrastructure.csproj", "{7518EBE1-5FBD-4C18-8532-1953BFB65542}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A07DA99-AC8B-46B9-AEE7-E7D9AB350352}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +29,16 @@ Global
 		{7518EBE1-5FBD-4C18-8532-1953BFB65542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7518EBE1-5FBD-4C18-8532-1953BFB65542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7518EBE1-5FBD-4C18-8532-1953BFB65542}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A73658E-8173-4B30-AD5A-A60361B777E9} = {5A07DA99-AC8B-46B9-AEE7-E7D9AB350352}
+		{7FBE99DE-3D58-4A09-8F51-340DD993BC8A} = {5A07DA99-AC8B-46B9-AEE7-E7D9AB350352}
+		{7518EBE1-5FBD-4C18-8532-1953BFB65542} = {5A07DA99-AC8B-46B9-AEE7-E7D9AB350352}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C0A5BA2-CA7F-4A07-A42F-05395E46286B}
 	EndGlobalSection
 EndGlobal
