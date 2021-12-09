@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_commerce.Domain.Entities;
+using E_commerce.Domain.Error;
 using E_commerce.Infrastructure.Common.Interfaces;
 using E_commerce.Infrastructure.Common.Specification;
 using E_commerce.Infrastructure.Contracts.Products.Queries;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_commerce.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandsRepo;
@@ -23,7 +22,8 @@ namespace E_commerce.API.Controllers
         public ProductController(
             IGenericRepository<Product> productsRepo,
             IGenericRepository<ProductBrand> productBrandsRepo,
-            IGenericRepository<ProductType> productTypesRepo, IMapper mapper)
+            IGenericRepository<ProductType> productTypesRepo, 
+            IMapper mapper)
         {
             _productsRepo = productsRepo;
             _productBrandsRepo = productBrandsRepo;
@@ -43,11 +43,15 @@ namespace E_commerce.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
             var spec = new ProductWithTypesAndBrandsSpecification(id);
 
             var product = await _productsRepo.GetEntityWithSpec(spec);
+
+            if (product == null) return NotFound(new ErrorResponse(400));
 
             return Ok(_mapper.Map<Product, ProductDTO>(product));
         }
