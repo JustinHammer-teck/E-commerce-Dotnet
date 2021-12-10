@@ -19,6 +19,11 @@ namespace E_commerce.Infrastructure.Data
         {
             base.OnModelCreating(modelbuilder);
             modelbuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            /*if (Database.ProviderName == "Microsoft.EntityFramework.Sqlite")
+            {
+
+            }*/
         }
 
     }

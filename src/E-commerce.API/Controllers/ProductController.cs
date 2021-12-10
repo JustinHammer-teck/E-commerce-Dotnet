@@ -5,6 +5,7 @@ using E_commerce.Domain.Entities;
 using E_commerce.Domain.Error;
 using E_commerce.Infrastructure.Common.Interfaces;
 using E_commerce.Infrastructure.Common.Specification;
+using E_commerce.Infrastructure.Contracts;
 using E_commerce.Infrastructure.Contracts.Products.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,14 +33,20 @@ namespace E_commerce.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDTO>>> GetAllProducts()
+        public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts(
+            [FromQuery]ProductSpecParams productParams)
         {
+            var countSpec = new ProductWithFilterForCountSpecification(productParams);
 
-            var spec = new ProductWithTypesAndBrandsSpecification();
+            var totalItems = await _productsRepo.CountAsync(countSpec);
+
+            var spec = new ProductWithTypesAndBrandsSpecification(productParams);
 
             var products = await _productsRepo.ListAsync(spec);
 
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products));
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products);
+
+            return Ok(new Pagination<ProductDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -62,6 +69,7 @@ namespace E_commerce.API.Controllers
         {
             return Ok(await _productBrandsRepo.GetAllAsync());
         }
+
 
         [HttpGet("types")]
         public async Task<IActionResult> GetAllProductTypes()
