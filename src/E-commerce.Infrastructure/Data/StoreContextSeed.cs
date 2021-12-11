@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
+    
 namespace E_commerce.Infrastructure.Data
 {
     public class StoreContextSeed
@@ -19,14 +18,15 @@ namespace E_commerce.Infrastructure.Data
             {
                 if (!context.ProductBrands.Any())
                 {
-                    var brandsData = File.ReadAllText("../Infrastructure/Data/Seed/brands.json");
+                    var brandsData = await File.ReadAllTextAsync("../E-commerce.Infrastructure/Data/Seed/brands.json");
 
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
-                    
-                    foreach( var item in brands)
-                    {
-                        await context.ProductBrands.AddAsync(item);
-                    }
+
+                    if (brands != null)
+                        foreach (var item in brands)
+                        {
+                            await context.ProductBrands.AddAsync(item);
+                        }
 
                     await context.SaveChangesAsync();
 
@@ -34,14 +34,15 @@ namespace E_commerce.Infrastructure.Data
 
                 if (!context.ProductTypes.Any())
                 {
-                    var typesData = File.ReadAllText("../Infrastructure/Data/Seed/types.json");
+                    var typesData = await File.ReadAllTextAsync("../E-commerce.Infrastructure/Data/Seed/types.json");
 
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
-                    foreach (var item in types)
-                    {
-                        await context.ProductTypes.AddAsync(item);
-                    }
+                    if (types != null)
+                        foreach (var item in types)
+                        {
+                            await context.ProductTypes.AddAsync(item);
+                        }
 
                     await context.SaveChangesAsync();
 
@@ -49,14 +50,15 @@ namespace E_commerce.Infrastructure.Data
 
                 if (!context.Products.Any())
                 {
-                    var productsData = File.ReadAllText("../Infrastructure/Data/Seed/products.json");
+                    var productsData = File.ReadAllText("../E-commerce.Infrastructure/Data/Seed/products.json");
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
-                    foreach (var item in products)
-                    {
-                        await context.Products.AddAsync(item);
-                    }
+                    if (products != null)
+                        foreach (var item in products)
+                        {
+                            await context.Products.AddAsync(item);
+                        }
 
                     await context.SaveChangesAsync();
 
