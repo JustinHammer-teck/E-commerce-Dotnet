@@ -5,8 +5,4 @@
         <RootNamespace>E_commerce.Domain</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Events\" />
-    </ItemGroup>
-
 </Project>

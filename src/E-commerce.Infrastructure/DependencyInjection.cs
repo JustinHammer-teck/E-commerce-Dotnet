@@ -15,12 +15,9 @@ namespace E_commerce.Infrastructure
             IConfiguration configuration)
         {
             services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
-
-
+            
             services.AddAutoMapper(typeof(MappingProfiles));
-
-            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+            
             services.AddDbContext<StoreContext>(x =>
                 x.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
